@@ -19,7 +19,11 @@ class MyApp extends StatelessWidget {
           // primarySwatch: Colors.blue,
           ),
       home: const LoginScreen(),
-      routes: {'/home_page_organisation': ((context) => BottomNavBar())},
+      routes: {
+        '/home_page_organisation': ((context) => BottomNavBar()),
+        '/logout': ((context) => const LoginScreen()),
+        '/home': ((context) => const HomePage())
+      },
     );
   }
 }
