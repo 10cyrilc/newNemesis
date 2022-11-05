@@ -22,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
     // postLoginDetails(registerNumber, password);
+    Navigator.pushNamed(context, '/home_page_organisation');
     _passwordController.clear();
     _passwordController.clear();
   }
