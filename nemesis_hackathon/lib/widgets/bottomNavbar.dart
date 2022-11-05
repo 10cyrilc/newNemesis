@@ -38,11 +38,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
         height: 60.0,
         items: const <Widget>[
           Icon(Icons.add, color: Colors.white, size: 30),
-          Icon(Icons.list, color: Colors.white, size: 30),
+          Icon(Icons.home, color: Colors.white, size: 30),
           Icon(Icons.perm_identity, color: Colors.white, size: 30),
         ],
         color: Theme.of(context).colorScheme.primary,
-        buttonBackgroundColor: Theme.of(context).colorScheme.secondary,
+        buttonBackgroundColor: Color.fromARGB(255, 62, 46, 88),
         backgroundColor: Colors.transparent,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 200),

@@ -22,7 +22,12 @@ class MyApp extends StatelessWidget {
       home: const LoginScreen(),
       routes: {
         '/home_page_organisation': ((context) => BottomNavBar()),
+
         '/maps': ((context) => Maps()),
+
+        '/logout': ((context) => const LoginScreen()),
+        '/home': ((context) => const HomePage())
+
       },
     );
   }
