@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:nemesis_hackathon/screens/home_page.dart';
 import 'package:nemesis_hackathon/screens/login_screen.dart';
+import 'package:nemesis_hackathon/widgets/bottomNavbar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,13 +13,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
       theme: ThemeData(
           colorScheme:
-              ColorScheme.light(primary: Color.fromARGB(255, 112, 111, 111))
+              const ColorScheme.light(primary: Color.fromARGB(255, 34, 34, 34))
           // primarySwatch: Colors.blue,
           ),
       home: const LoginScreen(),
+      routes: {
+        '/home_page_organisation': ((context) => BottomNavBar()),
+        '/logout': ((context) => const LoginScreen()),
+        '/home': ((context) => const HomePage())
+      },
     );
   }
 }
