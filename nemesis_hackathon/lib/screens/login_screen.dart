@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -31,8 +33,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    log(MediaQuery.of(context).size.height.toString());
+    log(MediaQuery.of(context).size.width.toString());
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: Container(
@@ -44,36 +52,34 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             Container(
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: Color.fromARGB(255, 212, 212, 212),
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(80)),
               ),
               height: MediaQuery.of(context).size.height * 0.7,
               width: double.infinity,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
                   Column(
                     children: [
                       Column(
-                        children: const [
+                        children: [
                           SizedBox(
-                            height: 10,
+                            height: height * 0.012820,
                           ),
-                          Text('Login',
+                          const Text('Login',
                               style: TextStyle(
                                 // color: Colors.black,
-                                fontSize: 30,
+                                fontSize: 40,
                                 fontWeight: FontWeight.bold,
                               )),
                           SizedBox(
-                            height: 30,
+                            height: height * 0.038461,
                           )
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
+                      SizedBox(
+                        height: height * 0.026410,
                       ),
                       Form(
                           key: _form,
@@ -92,9 +98,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     }
                                   },
                                   keyboardType: TextInputType.emailAddress,
-                                  style: TextStyle(color: Colors.black),
-                                  cursorColor:
-                                      Theme.of(context).colorScheme.onPrimary,
+                                  style: const TextStyle(color: Colors.black),
+                                  cursorColor: Colors.black,
                                   autocorrect: false,
                                   textInputAction: TextInputAction.next,
                                   decoration: InputDecoration(
@@ -119,16 +124,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                           color: Colors.grey, width: 0.0),
                                     ),
                                     filled: true,
-                                    fillColor: Colors.white.withOpacity(0.27),
+                                    fillColor: Colors.white,
                                     hintText: 'Email',
                                     hintStyle:
                                         const TextStyle(color: Colors.black),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        vertical: 10.0, horizontal: 20.0),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: height * 0.0238205,
+                                        horizontal: 20.0),
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 15),
+                              SizedBox(height: height * 0.0192307),
                               Stack(
                                 children: [
                                   Positioned(
@@ -155,10 +161,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                         },
                                         keyboardType:
                                             TextInputType.emailAddress,
-                                        style: TextStyle(color: Colors.black),
-                                        cursorColor: Theme.of(context)
-                                            .colorScheme
-                                            .onPrimary,
+                                        style: const TextStyle(
+                                            color: Colors.black),
+                                        cursorColor: Colors.black,
                                         autocorrect: false,
                                         textInputAction: TextInputAction.next,
                                         obscureText: changeIcon ? true : false,
@@ -192,15 +197,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 color: Colors.grey, width: 0.0),
                                           ),
                                           filled: true,
-                                          fillColor:
-                                              Colors.white.withOpacity(0.27),
+                                          fillColor: Colors.white,
                                           hintText: 'Password',
                                           hintStyle: const TextStyle(
                                               color: Colors.black),
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                                  vertical: 10.0,
-                                                  horizontal: 20.0),
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: height * 0.0228205,
+                                              horizontal: 20.0),
                                         ),
                                       ),
                                     ),
@@ -211,7 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     right: positionRight,
                                     bottom: positionBottom,
                                     child: SizedBox(
-                                      height: 63,
+                                      height: height * 0.080769,
                                       child: changeIcon
                                           ? IconButton(
                                               onPressed: () {
@@ -241,8 +244,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ],
                               ),
-                              const SizedBox(
-                                height: 20,
+                              SizedBox(
+                                height: height * 0.056410,
                               ),
                               ElevatedButton(
                                 onPressed: () {
@@ -264,9 +267,23 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ],
                           )),
+                      SizedBox(
+                        height: height * 0.04,
+                      ),
+                      const Text("Doesn't have an account? Sign Up")
                     ],
                   ),
                 ],
+              ),
+            ),
+            Positioned(
+              bottom: height * 0.576923,
+              child: SizedBox(
+                height: height * 0.512820,
+                child: const Image(
+                    image: AssetImage(
+                  'assets/nemesis_logo.png',
+                )),
               ),
             )
           ],
