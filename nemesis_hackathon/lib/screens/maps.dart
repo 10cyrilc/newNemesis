@@ -1,24 +1,77 @@
+import 'dart:async';
+import 'dart:developer';
+import 'package:location/location.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class Maps extends StatelessWidget {
-  const Maps({Key? key}) : super(key: key);
+class Maps extends StatefulWidget {
+  @override
+  State<Maps> createState() => MapsState();
+}
+
+class MapsState extends State<Maps> {
+//Current
+  LocationData? currentLocation;
+
+  void getCurrentLocation() {
+    Location location = Location();
+
+    location.getLocation().then((location) => {currentLocation = location});
+
+    location.onLocationChanged.listen((newLoc) {
+      currentLocation = newLoc;
+    });
+  }
+
+  //Maps
+  Completer<GoogleMapController> _controller = Completer();
+
+  static final CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
+
+  static final Marker _kGooglePlexMarker = Marker(
+      markerId: MarkerId('_kGooglePlex'),
+      infoWindow: InfoWindow(title: 'Google plex'),
+      icon: BitmapDescriptor.defaultMarker,
+      position: LatLng(37.42796133580664, -122.085749655962));
+
+  // static final CameraPosition _kLake = const CameraPosition(
+  //     bearing: 192.8334901395799,
+  //     target: LatLng(37.43296265331129, -122.08832357078792),
+  //     tilt: 59.440717697143555,
+  //     zoom: 19.151926040649414);
+
+  static final Marker _kLakeMarker = Marker(
+      markerId: MarkerId('_kGooglePlex'),
+      infoWindow: InfoWindow(title: 'Google plex'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+      position: LatLng(37.43296265331129, -122.08832357078792));
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Maps'),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        body: Container(
-          height: 500,
-          width: 300,
-          decoration: BoxDecoration(border: Border.all(color: Colors.white)),
-        ),
+    log('inside');
+    log(currentLocation.toString());
+    return new Scaffold(
+      body: GoogleMap(
+        markers: {_kGooglePlexMarker, _kLakeMarker},
+        mapType: MapType.hybrid,
+        initialCameraPosition: _kGooglePlex,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+        },
       ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: _goToTheLake,
+      //   label: Text('To the lake!'),
+      //   icon: const Icon(Icons.directions_boat),
+      // ),
     );
   }
+
+  // Future<void> _goToTheLake() async {
+  //   final GoogleMapController controller = await _controller.future;
+  //   controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+  // }
 }
