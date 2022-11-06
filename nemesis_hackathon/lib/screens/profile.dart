@@ -11,12 +11,17 @@ class ProfileScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.popAndPushNamed(context, '/home');
+              // Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.black,
+            )),
         elevation: 0,
-        leading: const Icon(
-          Icons.arrow_back,
-          color: Colors.black,
-        ),
+        backgroundColor: Colors.transparent,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

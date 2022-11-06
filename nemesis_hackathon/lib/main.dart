@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:nemesis_hackathon/screens/activity.dart';
+import 'package:nemesis_hackathon/screens/authority.dart';
 import 'package:nemesis_hackathon/screens/home_page.dart';
 import 'package:nemesis_hackathon/screens/login_screen.dart';
 import 'package:nemesis_hackathon/screens/maps.dart';
+import 'package:nemesis_hackathon/screens/profile.dart';
 import 'package:nemesis_hackathon/widgets/bottomNavbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -33,10 +36,11 @@ class MyApp extends StatelessWidget {
         '/home': ((context) => HomePage())
 
         '/maps': ((context) => Maps()),
-
         '/logout': ((context) => const LoginScreen()),
-        '/home': ((context) => const HomePage())
-
+        '/home': ((context) => BottomNavBar()),
+        '/profile': ((context) => ProfileScreen()),
+        '/Activity': ((context) => AcitivityScreen()),
+        '/Authority': ((context) => AuthorityScreen())
       },
     );
   }
