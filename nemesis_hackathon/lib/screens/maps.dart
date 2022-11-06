@@ -90,6 +90,7 @@ class MapsState extends State<Maps> {
 
   @override
   Widget build(BuildContext context) {
+
     log('inside');
     getCurrentLocation();
     return Scaffold(
@@ -115,6 +116,7 @@ class MapsState extends State<Maps> {
       //   label: Text('To the lake!'),
       //   icon: const Icon(Icons.directions_boat),
       // ),
+
     );
   }
 
