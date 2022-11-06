@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nemesis_hackathon/screens/home_page.dart';
 import 'package:nemesis_hackathon/screens/login_screen.dart';
+import 'package:nemesis_hackathon/screens/maps.dart';
 import 'package:nemesis_hackathon/widgets/bottomNavbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -27,8 +28,15 @@ class MyApp extends StatelessWidget {
       home: LoginScreen(),
       routes: {
         '/home_page_organisation': ((context) => BottomNavBar()),
+
         '/logout': ((context) => LoginScreen()),
         '/home': ((context) => HomePage())
+
+        '/maps': ((context) => Maps()),
+
+        '/logout': ((context) => const LoginScreen()),
+        '/home': ((context) => const HomePage())
+
       },
     );
   }

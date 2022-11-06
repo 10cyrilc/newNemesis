@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:nemesis_hackathon/screens/dummy%20copy.dart';
 import 'package:nemesis_hackathon/screens/dummy.dart';
 import 'package:nemesis_hackathon/screens/home_page.dart';
+import 'package:nemesis_hackathon/screens/profile.dart';
+import 'package:nemesis_hackathon/screens/waste_selection.dart';
 
 // void main() => runApp(MaterialApp(home: BottomNavBar()));
 //semester
@@ -19,9 +21,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   final screens = [
-    const DummyScreen(),
+    const ProfileScreen(),
     const HomePage(),
-    const DummyScreen1(),
+    const WasteSelectionPage(),
   ];
   @override
   Widget build(BuildContext context) {
