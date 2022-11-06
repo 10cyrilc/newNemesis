@@ -9,7 +9,6 @@ import 'package:nemesis_hackathon/widgets/bottomNavbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-
 import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
@@ -18,7 +17,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MyApp());
-
 }
 
 class MyApp extends StatefulWidget {
@@ -58,17 +56,12 @@ class _MyAppState extends State<MyApp> {
       home: LoginScreen(),
       routes: {
         '/home_page_organisation': ((context) => BottomNavBar()),
-
-
-        
-
         '/maps': ((context) => Maps()),
-        '/logout': ((context) => const LoginScreen()),
+        '/logout': ((context) => LoginScreen()),
         '/home': ((context) => BottomNavBar()),
         '/profile': ((context) => ProfileScreen()),
         '/Activity': ((context) => AcitivityScreen()),
         '/Authority': ((context) => AuthorityScreen())
-
       },
     );
   }
