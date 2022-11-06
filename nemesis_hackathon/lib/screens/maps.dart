@@ -11,31 +11,63 @@ class Maps extends StatefulWidget {
 
 class MapsState extends State<Maps> {
 //Current
-  LocationData? currentLocation;
+  static LocationData? currentLocation;
 
-  void getCurrentLocation() {
+  Future<void> getCurrentLocation() async {
     Location location = Location();
 
-    location.getLocation().then((location) => {currentLocation = location});
+    location.getLocation().then((location) => {
+          setState(() {
+            currentLocation = location;
+          })
+        });
 
     location.onLocationChanged.listen((newLoc) {
       currentLocation = newLoc;
     });
+    log(currentLocation.toString());
   }
 
   //Maps
-  Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controller = Completer();
 
   static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
+    target: LatLng(currentLocation!.latitude!, currentLocation!.longitude!),
+    // target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
   );
 
-  static final Marker _kGooglePlexMarker = Marker(
+  static const Marker _kGooglePlexMarker1 = Marker(
       markerId: MarkerId('_kGooglePlex'),
-      infoWindow: InfoWindow(title: 'Google plex'),
+      infoWindow: InfoWindow(title: 'Organisation 1'),
       icon: BitmapDescriptor.defaultMarker,
-      position: LatLng(37.42796133580664, -122.085749655962));
+      position: LatLng(8.55012961315801, 76.94184412180768));
+  static const Marker _kGooglePlexMarker2 = Marker(
+      markerId: MarkerId('_kGooglePlex'),
+      infoWindow: InfoWindow(title: 'Organisation 2'),
+      icon: BitmapDescriptor.defaultMarker,
+      position: LatLng(8.549222491487468, 76.94259245811591));
+  static const Marker _kGooglePlexMarker3 = Marker(
+      markerId: MarkerId('_kGooglePlex'),
+      infoWindow: InfoWindow(title: 'Organisation 3'),
+      icon: BitmapDescriptor.defaultMarker,
+      position: LatLng(8.551259550440298, 76.94229191480419));
+  static const Marker _kGooglePlexMarker4 = Marker(
+      markerId: MarkerId('_kGooglePlex'),
+      infoWindow: InfoWindow(title: 'Organisation 4'),
+      icon: BitmapDescriptor.defaultMarker,
+      position: LatLng(8.552004885955784, 76.94208578657859));
+  static const Marker _kGooglePlexMarker5 = Marker(
+      markerId: MarkerId('_kGooglePlex'),
+      infoWindow: InfoWindow(title: 'Organisation 5'),
+      icon: BitmapDescriptor.defaultMarker,
+      position: LatLng(8.553682414075555, 76.93402379540439));
+  static final Marker _mbc = Marker(
+      markerId: const MarkerId('_kGooglePlex'),
+      infoWindow: const InfoWindow(title: 'Your Location'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+      position:
+          LatLng(currentLocation!.latitude!, currentLocation!.longitude!));
 
   // static final CameraPosition _kLake = const CameraPosition(
   //     bearing: 192.8334901395799,
@@ -43,25 +75,41 @@ class MapsState extends State<Maps> {
   //     tilt: 59.440717697143555,
   //     zoom: 19.151926040649414);
 
-  static final Marker _kLakeMarker = Marker(
-      markerId: MarkerId('_kGooglePlex'),
-      infoWindow: InfoWindow(title: 'Google plex'),
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-      position: LatLng(37.43296265331129, -122.08832357078792));
+  // static final Marker _kLakeMarker = Marker(
+  //     markerId: MarkerId('_kGooglePlex'),
+  //     infoWindow: InfoWindow(title: 'Google plex'),
+  //     icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+  //     position: LatLng(37.43296265331129, -122.08832357078792));
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getCurrentLocation();
+  }
 
   @override
   Widget build(BuildContext context) {
     log('inside');
-    log(currentLocation.toString());
-    return new Scaffold(
-      body: GoogleMap(
-        markers: {_kGooglePlexMarker, _kLakeMarker},
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
+    getCurrentLocation();
+    return Scaffold(
+      body: currentLocation == null
+          ? Text('Loading')
+          : GoogleMap(
+              markers: {
+                _kGooglePlexMarker1,
+                _kGooglePlexMarker2,
+                _kGooglePlexMarker3,
+                _kGooglePlexMarker4,
+                _kGooglePlexMarker5,
+                _mbc
+              },
+              mapType: MapType.hybrid,
+              initialCameraPosition: _kGooglePlex,
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
+            ),
       // floatingActionButton: FloatingActionButton.extended(
       //   onPressed: _goToTheLake,
       //   label: Text('To the lake!'),

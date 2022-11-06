@@ -10,6 +10,8 @@ class WasteSelectionPage extends StatefulWidget {
 }
 
 class _WasteSelectionPageState extends State<WasteSelectionPage> {
+  bool first_drop = false;
+  bool second_drop = false;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -51,19 +53,23 @@ class _WasteSelectionPageState extends State<WasteSelectionPage> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),
                                 side: const BorderSide(color: Colors.white)),
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                first_drop = !first_drop;
+                              });
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                children: const [
+                                children: [
                                   Text(
-                                    'Donate',
-                                    style: TextStyle(
+                                    first_drop ? 'Donate' : 'Waste',
+                                    style: const TextStyle(
                                         color: Colors.white, fontSize: 20),
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.arrow_drop_down_sharp,
                                     size: 30,
                                     color: Colors.white,
@@ -94,18 +100,22 @@ class _WasteSelectionPageState extends State<WasteSelectionPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               side: const BorderSide(color: Colors.white)),
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              second_drop = !second_drop;
+                            });
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 Text(
-                                  'Recyclable',
-                                  style: TextStyle(
+                                  second_drop ? 'Recyclable' : 'Non-Recyclable',
+                                  style: const TextStyle(
                                       color: Colors.white, fontSize: 20),
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.arrow_drop_down_sharp,
                                   size: 30,
                                   color: Colors.white,
