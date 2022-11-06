@@ -22,9 +22,12 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           UserAccountsDrawerHeader(
-            accountName: const Text(
-              'Name',
-              style: TextStyle(fontSize: 10),
+            accountName: const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                'User Name',
+                style: TextStyle(fontSize: 10),
+              ),
             ),
             currentAccountPicture: const CircleAvatar(
               backgroundColor: Colors.white,
@@ -36,7 +39,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
               ),
             ),
             accountEmail: const Text(
-              'mbccet.com',
+              '',
               style: TextStyle(fontSize: 10),
             ),
             decoration: BoxDecoration(

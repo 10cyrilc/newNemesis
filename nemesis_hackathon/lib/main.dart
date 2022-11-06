@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:nemesis_hackathon/screens/activity.dart';
+import 'package:nemesis_hackathon/screens/authority.dart';
 import 'package:nemesis_hackathon/screens/home_page.dart';
 import 'package:nemesis_hackathon/screens/login_screen.dart';
 import 'package:nemesis_hackathon/screens/maps.dart';
+import 'package:nemesis_hackathon/screens/profile.dart';
 import 'package:nemesis_hackathon/widgets/bottomNavbar.dart';
 
 void main() {
@@ -22,12 +25,12 @@ class MyApp extends StatelessWidget {
       home: const LoginScreen(),
       routes: {
         '/home_page_organisation': ((context) => BottomNavBar()),
-
         '/maps': ((context) => Maps()),
-
         '/logout': ((context) => const LoginScreen()),
-        '/home': ((context) => const HomePage())
-
+        '/home': ((context) => BottomNavBar()),
+        '/profile': ((context) => ProfileScreen()),
+        '/Activity': ((context) => AcitivityScreen()),
+        '/Authority': ((context) => AuthorityScreen())
       },
     );
   }
