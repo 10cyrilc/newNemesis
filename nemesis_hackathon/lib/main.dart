@@ -3,9 +3,15 @@ import 'package:nemesis_hackathon/screens/home_page.dart';
 import 'package:nemesis_hackathon/screens/login_screen.dart';
 import 'package:nemesis_hackathon/screens/maps.dart';
 import 'package:nemesis_hackathon/widgets/bottomNavbar.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -19,9 +25,12 @@ class MyApp extends StatelessWidget {
               const ColorScheme.light(primary: Color.fromARGB(255, 34, 34, 34))
           // primarySwatch: Colors.blue,
           ),
-      home: const LoginScreen(),
+      home: LoginScreen(),
       routes: {
         '/home_page_organisation': ((context) => BottomNavBar()),
+
+        '/logout': ((context) => LoginScreen()),
+        '/home': ((context) => HomePage())
 
         '/maps': ((context) => Maps()),
 
