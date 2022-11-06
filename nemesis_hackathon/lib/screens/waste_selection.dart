@@ -17,6 +17,20 @@ class _WasteSelectionPageState extends State<WasteSelectionPage> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.popAndPushNamed(context, '/home');
+              // Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.black,
+            )),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
       body: Stack(
         alignment: Alignment.bottomLeft,
         children: [

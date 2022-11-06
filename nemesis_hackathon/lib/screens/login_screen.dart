@@ -1,31 +1,51 @@
 import 'dart:developer';
+import 'package:nemesis_hackathon/data/db/firestore_helper.dart';
+import 'package:nemesis_hackathon/models.dart/user_model.dart';
+
+import '../services/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String? errorMessage = '';
   final _form = GlobalKey<FormState>();
 
   final _loginPassword = TextEditingController();
 
   final _passwordController = TextEditingController();
 
-  void onSubmit(registerNumber, password) {
+  void onSubmit(registerNumber, password) async {
     final validate = _form.currentState!.validate();
     if (!validate) {
       return;
     }
-    // postLoginDetails(registerNumber, password);
-    Navigator.pushNamed(context, '/home_page_organisation');
-    _passwordController.clear();
-    _passwordController.clear();
+    // postLoginDetails(registerNumber, password)
+    try {
+      await Authservice().signInWithEmailAndPassword(
+          email: _loginPassword.text, password: _passwordController.text);
+      Navigator.pushNamed(context, '/home_page_organisation');
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+      });
+    }
+    final model =
+        userModel(name: 'Tinu', type: 'hotel', organization: 'Tinu and Sons');
+    log(model.toString());
+    // firestoreHelper.create(
+    //     userModel(name: 'Tinu', type: 'hotel', organization: 'Tinu and Sons'));
   }
+
+  // _passwordController.clear();
+  // _passwordController.clear();
 
   bool changeIcon = false;
   bool IconPosition = false;
