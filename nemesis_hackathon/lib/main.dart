@@ -31,12 +31,10 @@ class MyApp extends StatelessWidget {
       home: LoginScreen(),
       routes: {
         '/home_page_organisation': ((context) => BottomNavBar()),
-
         '/logout': ((context) => LoginScreen()),
-        '/home': ((context) => HomePage())
-
+        '/home': ((context) => HomePage()),
         '/maps': ((context) => Maps()),
-        '/logout': ((context) => const LoginScreen()),
+        '/logout': ((context) => LoginScreen()),
         '/home': ((context) => BottomNavBar()),
         '/profile': ((context) => ProfileScreen()),
         '/Activity': ((context) => AcitivityScreen()),
